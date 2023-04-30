@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ordersURL = `${import.meta.env.VITE_JSON_SERVER_URL}/orders`;
+const ordersURL = `${process.env.VITE_JSON_SERVER_URL}/orders`;
 
 export const fetchOrdersUsingOptions = async(options={}) => {
     const {page=1, limit=10, searchBy, searchString} = options;

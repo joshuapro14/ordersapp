@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {USER_NAME, PASSWORD} from "../../app/constants";
 
-const USER_NAME = import.meta.env.VITE_USER_NAME;
-const PASSWORD = import.meta.env.VITE_PASSWORD;
 
-const initialState = {
+export const initialState = {
     isLoggedIn: false
 }
 

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchOrdersUsingOptions } from './ordersService';
 
 
-const initialState = {
+export const initialState = {
     orders: [],
     totalOrders: 0,
     limitPerPage: 10,
@@ -35,7 +35,7 @@ const ordersSlice = createSlice({
             state.searchBy = searchBy;
         },
         setCurrentPage(state, action) {         
-            console.log('[setCurrentPage]',{currentPage: state.currentPage, payload: action.payload})   
+            //console.log('[setCurrentPage]',{currentPage: state.currentPage, payload: action.payload})   
             state.currentPage = +(action.payload || 1);
         }
     },
