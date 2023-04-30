@@ -1,0 +1,24 @@
+.input {
+    padding: 0.5rem;
+    border: 0.1rem solid black;
+    border-radius: 0.2rem;
+    font-size: 1.5rem;
+    background-color: whitesmoke;
+    width: 100%;
+}
+.centerBox{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: 15px;
+    /* border: 3px solid grey;
+    border-radius: 5px; */
+}
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

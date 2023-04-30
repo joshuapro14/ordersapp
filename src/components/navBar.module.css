@@ -1,0 +1,16 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: aquamarine;
+    margin-bottom: 10px;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav li {
+    padding-left: 15px;
+}
