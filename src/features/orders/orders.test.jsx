@@ -3,8 +3,30 @@ import { screen } from '@testing-library/react'
 import { renderWithProviders, waitFor } from '../../utils/test-utils';
 import Orders from './orders';
 import testdata from './orders_testdata.json';
-import axios from 'axios';
 import { ORDER_TABLE_HEADER_VALUES, searchBys } from '../../app/constants';
+
+const tenOrders = testdata.orders.slice(0, 10);
+
+
+jest.mock("./ordersService", () => {
+    const testdata = jest.requireActual('./orders_testdata.json')
+    const originalModule = jest.requireActual('./ordersService');
+    return {
+        __esModule: true,
+        ...originalModule,
+        async fetchOrdersUsingOptions(options = {}) {
+            const { page = 1, limit = 10 } = options;
+            const tenOrders = testdata.orders.slice(0, 10);
+            const totalOrders = testdata.orders.length;
+            return {
+                orders: tenOrders,
+                totalOrders,
+                limit,
+                page
+            }
+        }
+    }
+})
 
 
 jest.mock("axios");
@@ -41,13 +63,15 @@ const getOptionsInSearchByDropDown = (searchBySelect) => {
 }
 
 describe("Orders Page", () => {
-    it("should show search By Dropdown box", () => {
+    it("should show search By Dropdown box", async () => {
         renderWithProviders(<Orders />);
+        await waitFor();
         const element = screen.getByTestId('searchBySelect');
         expect(element).toBeInTheDocument();
     })
-    it("should show All search By options in search By Dropdown box", () => {
+    it("should show All search By options in search By Dropdown box", async () => {
         renderWithProviders(<Orders />);
+        await waitFor();
         const element = screen.getByTestId('searchBySelect');
         expect(element).toBeInTheDocument();
         const options = getOptionsInSearchByDropDown(element);
@@ -56,26 +80,22 @@ describe("Orders Page", () => {
             `Option Mismatch`
         ).toMatchObject(searchBys);
     })
-    it("Page shows search Bar input Box", () => {
+    it("Page shows search Bar input Box", async () => {
         renderWithProviders(<Orders />);
+        await waitFor();
         const element = screen.getByTestId('inputsearch');
         expect(element).toBeInTheDocument();
     })
 
-    it("should show table with orders", async () => {
-        const tenOrders = testdata.orders.slice(0, 10);
-        const totalOrders = testdata.orders.length;
-        axios.get.mockResolvedValueOnce({ data: tenOrders, headers: { "x-total-count": totalOrders } });
+    it("should show table with orders", async () => {        
         renderWithProviders(<Orders />);
         await waitFor();
         const table = screen.getByTestId('table-orders');
         expect(table).toBeInTheDocument();
     })
 
-    it("Should match number of orders in page with API Orders", async() => {
-        const tenOrders = testdata.orders.slice(0, 10);
-        const totalOrders = testdata.orders.length;
-        axios.get.mockResolvedValueOnce({ data: tenOrders, headers: { "x-total-count": totalOrders } });
+    it("Should match number of orders in page with API Orders", async () => {
+        
         renderWithProviders(<Orders />);
         await waitFor();
         const table = screen.getByTestId('table-orders');
@@ -87,16 +107,13 @@ describe("Orders Page", () => {
         ).toEqual(tenOrders.length);
     })
 
-    it("Should match orders in page with API Orders", async() => {
-        const tenOrders = testdata.orders.slice(0, 10);
-        const totalOrders = testdata.orders.length;
-        axios.get.mockResolvedValueOnce({ data: tenOrders, headers: { "x-total-count": totalOrders } });
+    it("Should match orders in page with API Orders", async () => {
         renderWithProviders(<Orders />);
         await waitFor();
         const table = screen.getByTestId('table-orders');
         expect(table).toBeInTheDocument();
         const orders = getDataInTable(table);
-        tenOrders.forEach((apiOrder,i) => {
+        tenOrders.forEach((apiOrder, i) => {
             const renderedOrder = orders[i];
             expect(
                 renderedOrder,

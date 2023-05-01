@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import {setupStore} from '../app/store';
 
@@ -19,6 +19,10 @@ export const renderWithProviders = (
     return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
 }
 
-export const waitFor = (timeInMs=1000) => {
-    return new Promise(r => setTimeout(r, timeInMs));
+export const waitFor = async(timeInMs=50) => {
+    await act(async () => {
+        await new Promise((resolve) => {
+          setTimeout(resolve, timeInMs);
+        });
+    });
 }
