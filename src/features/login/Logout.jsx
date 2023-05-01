@@ -6,7 +6,7 @@ const Logout = () => {
     const dispatch = useDispatch();
   return (
     <>
-        <button id="logoutBtn" onClick={() => dispatch(logout())}
+        <button data-testid="logoutBtn" onClick={() => dispatch(logout())}
             className={Style.logoutBtn}>
             Logout
         </button>

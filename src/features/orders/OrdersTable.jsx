@@ -1,3 +1,4 @@
+import React from 'react'
 import {useSelector} from 'react-redux';
 import {getAllOrders} from './ordersSlice';
 
@@ -21,7 +22,7 @@ const OrdersTable = () => {
     <div className={Style.ordersTable}>
 
     
-    <table id="table-orders">
+    <table data-testid="table-orders">
         <thead>
             <tr>
                 <th>Order ID</th>

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
+import React from 'react'
 import { memo, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSearchBy, getSearchString, setSearch } from './ordersSlice';
@@ -12,7 +13,7 @@ const DropDownFilters = memo(({ searchBy, setSearchBy }) => {
         setSearchBy(e.target.value);
     }
     return (
-        <select id="selectPage" onChange={change} value={searchBy}>
+        <select data-testid="searchBySelect" onChange={change} value={searchBy}>
             {
                 searchBys
                     .map((s) => (
@@ -43,7 +44,7 @@ const FilterBox = memo(({searchString, setSearchString, onEnter})=>{
                 className={Style.input} onChange={handleChange} 
                 onKeyDown={handleKeyDown}
                 value={searchString}
-                id="inputsearch"
+                data-testid="inputsearch"
             />
         </span>
     )

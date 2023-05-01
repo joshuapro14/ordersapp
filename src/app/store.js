@@ -1,10 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import ordersReducer from '../features/orders/ordersSlice';
-import loginReducer from  '../features/login/loginSlice';
+import loginReducer from '../features/login/loginSlice';
 
-export const store = configureStore({
+const rootReducer = combineReducers({
+    orders: ordersReducer,
+    login: loginReducer
+})
+
+export const setupStore = preloadedState => {
+    return configureStore({
+        reducer: rootReducer,
+        preloadedState
+    })
+}
+
+export const store = setupStore({});
+
+/* export const store = configureStore({
     reducer: {
         orders: ordersReducer,
         login: loginReducer
     }
-})
+}) */

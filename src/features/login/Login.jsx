@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getIsLoggedIn, login} from './loginSlice';
@@ -23,7 +24,7 @@ const LoginBox = () => {
                 <input type="text" 
                     className={Style.input} onChange={changeUserName} 
                     value={userName}
-                    id="userName"
+                    data-testid="userName"
                 />
             </div>
             <div className={Style.inputBox}>
@@ -32,13 +33,13 @@ const LoginBox = () => {
                     className={Style.input} onChange={changePassword} 
                     value={password}
                     onKeyDown={handleKeyDown}
-                    id="password"
+                    data-testid="password"
                 />
             </div>
             <div className={Style.inputBox}>
                 <button 
                     onClick={() => dispatch(login({userName, password}))}
-                    id="loginBtn">
+                    data-testid="loginBtn">
                     Login
                 </button>
             </div>
