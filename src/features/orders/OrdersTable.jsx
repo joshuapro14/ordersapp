@@ -1,6 +1,7 @@
 import React from 'react'
 import {useSelector} from 'react-redux';
 import {getAllOrders} from './ordersSlice';
+import {ORDER_TABLE_HEADERS} from '../../app/constants'
 
 import Style from './ordersTable.module.css';
 
@@ -25,10 +26,10 @@ const OrdersTable = () => {
     <table data-testid="table-orders">
         <thead>
             <tr>
-                <th>Order ID</th>
-                <th>Vendor Name</th>
-                <th>Order Status</th>
-                <th>Pickup Date</th>
+                <th>{ORDER_TABLE_HEADERS.orderId}</th>
+                <th>{ORDER_TABLE_HEADERS.vendorName}</th>
+                <th>{ORDER_TABLE_HEADERS.orderStatus}</th>
+                <th>{ORDER_TABLE_HEADERS.pickUpDate}</th>
             </tr>
         </thead>
         <tbody>

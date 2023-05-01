@@ -11,7 +11,7 @@ export const fetchOrdersUsingOptions = async(options={}) => {
     if(searchBy != null && searchString != null){
         params[`${searchBy}_like`] = searchString;
     }
-    console.log('[Orders Service]',{
+    console.log('[Orders Service][fetchOrders]',{
         options,
         params
     });
@@ -20,8 +20,8 @@ export const fetchOrdersUsingOptions = async(options={}) => {
     });
     const totalOrders = response.headers["x-total-count"]; // length of your data without page limit
     const orders = response.data;
-    console.log('[Orders Service]',{
-        orders,
+    console.log('[Orders Service][fetchOrders][Resolved]',{
+        ordersSize: orders.length,
         totalOrders,
         limit,
         page,

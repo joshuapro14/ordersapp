@@ -1,9 +1,6 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-// import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
-// import ordersReducer from '../features/orders/ordersSlice';
-// import loginReducer from '../features/login/loginSlice';
+import React from 'react';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import {setupStore} from '../app/store';
 
 export const renderWithProviders = (
@@ -20,4 +17,8 @@ export const renderWithProviders = (
     }
 
     return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+}
+
+export const waitFor = (timeInMs=1000) => {
+    return new Promise(r => setTimeout(r, timeInMs));
 }
